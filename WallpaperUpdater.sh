@@ -29,4 +29,4 @@ $(curl "$imageSource" -o "$imageDestination")
 
 echo "Download complete. The image is at: $imageDestination" # Note: This might be displayed even if the image destination is invalid
 
-$(osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$imageDestination\"")
+$(osascript -e "tell application \"System Events\" to set picture of every desktop to \"$imageDestination\"")
