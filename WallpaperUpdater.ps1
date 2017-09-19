@@ -23,6 +23,7 @@ This scripts fixes some bugs in the original code. A separate pull request has a
 	
 #>
 
+
 Function Get-APODImage($date, $ImagePath){
                 
     $year = $date.ToString("yy")
@@ -36,18 +37,15 @@ Function Get-APODImage($date, $ImagePath){
 
     $htmlRet = $htmlRet -split "`n"
     
-    $picLine = $htmlRet | ? { $_ -like '*<a href="image/*' }
+    $picLine = $htmlRet | ? { $_ -like '*<img src="image/*' }
     $picDescr = $htmlRet | ? { $_ -like '*<title> APOD:*' }
 
-    $imagePathPart = $picLine -replace '<a href="' -replace '"'
+    $imagePathPart = $picLine -replace '<img src="' -replace '"'
     $imageDescr = $picDescr.Substring($picDescr.IndexOf("-")+2) -replace " ","_"
     $validateRegex = "[{0}]" -f ([Regex]::Escape( [System.IO.Path]::GetInvalidFileNameChars() -join '' ))
     $imageDescr = $imageDescr -replace "$validateRegex","_"
     
     $imageSavePath = "$($ImagePath)\APOD_$(Get-Date -Format "yyyy_MM_dd")_$($imageDescr).jpg"
-	Write-Host $imageSavePath
-	Write-Host $imagePathPart
-	Write-Host "https://apod.nasa.gov/apod/$($imagePathPart)"
 	
     $webClient.DownloadFile("https://apod.nasa.gov/apod/$($imagePathPart)", $imageSavePath)
 	
