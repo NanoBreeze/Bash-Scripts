@@ -1,10 +1,5 @@
 ﻿<#
 
-NOTE: Providing credit where it is due:
-A significant portion of this script is copy/pasted from Bierii's apod-wallpaper repository, 
-which is available at https://github.com/Bierii/apod-wallpaper/blob/master/Get-APODWallpaper.ps1
-This scripts fixes some bugs in the original code. A separate pull request has also been submitted
-
 # .SYNOPSIS  
     apod-wallpaper
     
@@ -22,7 +17,6 @@ This scripts fixes some bugs in the original code. A separate pull request has a
     http://yanikbieri.ch/home/category/apod-wallpaper/
 	
 #>
-
 
 Function Get-APODImage($date, $ImagePath){
                 
